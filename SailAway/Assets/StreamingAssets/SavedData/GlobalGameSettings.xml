@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<ArrayOfGlobalGameSetting xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <GlobalGameSetting>
+    <Label>Difficulty</Label>
+    <Value>Starter</Value>
+    <PossibleValues>
+      <string>Starter</string>
+      <string>Easy</string>
+      <string>Medium</string>
+      <string>Hard</string>
+      <string>Expert</string>
+    </PossibleValues>
+    <Default>Starter</Default>
+  </GlobalGameSetting>
+  <GlobalGameSetting>
+    <Label>Level</Label>
+    <Value>1</Value>
+    <PossibleValues>
+      <string>1</string>
+      <string>2</string>
+      <string>3</string>
+      <string>4</string>
+      <string>5</string>
+      <string>6</string>
+      <string>7</string>
+      <string>8</string>
+    </PossibleValues>
+    <Default>1</Default>
+  </GlobalGameSetting>
+  <GlobalGameSetting>
+    <Label>HS Reset</Label>
+    <Value>No</Value>
+    <PossibleValues>
+      <string>Yes</string>
+      <string>No</string>
+    </PossibleValues>
+    <Default>No</Default>
+  </GlobalGameSetting>
+</ArrayOfGlobalGameSetting>
