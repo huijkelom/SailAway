@@ -48,6 +48,10 @@ public class Pointbehavoir : MonoBehaviour, I_SmartwallInteractable
             Image.enabled = false;
             CanInteract = false;
         }
+        else
+        {
+            StartCoroutine(boatvisible());
+        }
     }
     void OnTriggerEnter(Collider other)
     {
@@ -137,5 +141,18 @@ public class Pointbehavoir : MonoBehaviour, I_SmartwallInteractable
     private void ToScores()
     {
         ScoreScreenController.MoveToScores(new List<int>(new int[1] { controller.Score,}), controller.LevelName);
+    }
+
+    IEnumerator boatvisible()
+    {
+        Image.enabled = true;
+        Image.color = new Vector4(1,1,1,0.7f);
+        for(int i =0; i<50;i++)
+        {
+            Image.color = Color.Lerp(Image.color, new Vector4(1,1,1,0), 0.04f);
+            yield return null;
+        }
+        Image.color = new Vector4(1, 1, 1, 1f);
+        Image.enabled = false;
     }
 }
