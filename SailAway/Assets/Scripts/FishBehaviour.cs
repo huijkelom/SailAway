@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class FishBehaviour : MonoBehaviour
 {
+    int spawnplace;
+    public Vector3 place;
+    public Vector3 movingTowards;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,20 +16,45 @@ public class FishBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     IEnumerator _Wait()
     {
-        yield return new WaitForSeconds(Random.Range(20, 60));
-        StartCoroutine("FishEnter");
-        StartCoroutine("FishEnter277");
+        yield return new WaitForSeconds(Random.Range(5, 10));
+        spawnplace = Random.Range(0, 4);
+        switch (spawnplace)
+        {
+            case 0:
+                place = new Vector3(8, Random.Range(5, -5), 1);
+                transform.eulerAngles = new Vector3(180,90,90);
+                movingTowards = new Vector3(0.02f, 0, 0);
+                break;
+            case 1:
+                place = new Vector3(Random.Range(6, -6), 7, 1);
+                transform.eulerAngles = new Vector3(90, 90, 90);
+                movingTowards = new Vector3(0, 0.02f, 0);
+
+                break;
+            case 2:
+                place = new Vector3(-8, Random.Range(5, -5), 1);
+                transform.eulerAngles = new Vector3(00, 90, 90);
+                movingTowards = new Vector3(-0.02f, 0, 0);
+                break;
+            case 3:
+                place = new Vector3(Random.Range(6, -6), -7, 1);
+                transform.eulerAngles = new Vector3(270, 90, 90);
+                movingTowards = new Vector3(0, -0.02f, 0);
+                break;
+        }
+        StartCoroutine(FishEnter());
+        //StartCoroutine(FishEnter2());
     }
     IEnumerator FishEnter()
     {
-        transform.position = new Vector3(8, Random.Range(5, -5), 0);
-        while(transform.position.x >-10)
+        transform.position = place;
+        while(Vector3.Distance(transform.position,place)<15)
         {
-            transform.position -= new Vector3(0.02f, 0, 0);
+            transform.position -= movingTowards;
             //transform.
             yield return null; 
         }
@@ -36,7 +64,7 @@ public class FishBehaviour : MonoBehaviour
     float ObjectMove2;
     IEnumerator FishEnter2()
     {
-        if (transform.rotation.y > 0)
+        if (transform.rotation.z > -75)
         {
             ObjectMove1 -= 0.0004f;
         }
@@ -45,7 +73,7 @@ public class FishBehaviour : MonoBehaviour
             ObjectMove1 += 0.0004f;
         }
         transform.Rotate(Vector3.forward * ObjectMove1);
-        if (transform.position.x > 0)
+        if (transform.position.z> -75)
         {
             ObjectMove2 -= 0.00004f;
         }
@@ -53,7 +81,7 @@ public class FishBehaviour : MonoBehaviour
         {
             ObjectMove2 += 0.00004f;
         }
-        transform.Translate(Vector3.right * (ObjectMove2));
+        //transform.Translate(Vector3.forward * (ObjectMove2));
         yield return null;
     }
 }
