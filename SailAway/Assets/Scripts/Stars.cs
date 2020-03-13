@@ -14,6 +14,7 @@ public class Stars : MonoBehaviour
     GameObject SpawnPlace;
     public AudioSource audi;
     public Sprite redboat;
+    public GameObject arrow;
     // Start is called before the first frame update
     public void AmountStars()
     {
@@ -69,6 +70,11 @@ public class Stars : MonoBehaviour
             {
                 xaxis = -2;
                 back = -41f;
+            }
+            else if(i>82)
+            {
+                GameObject _arrow = Instantiate(arrow, new Vector3((length+1), xaxis, 0), Quaternion.identity, gameObject.transform);
+                break;
             }
             yield return new WaitForSeconds(0.05f);
         }
