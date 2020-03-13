@@ -111,10 +111,10 @@ public class Manager : MonoBehaviour
             GameObject BoatImg = newboat.transform.GetChild(0).gameObject;
             BoatImg.GetComponent<Image>().sprite = LongSprite;
             newboat.GetComponent<Image>().sprite = LongSpriteGlow;
-            newboat.GetComponent<BoxCollider2D>().size = new Vector2(95, 335);
+            newboat.GetComponent<BoxCollider2D>().size = new Vector2(119, 335);
             newboat.GetComponent<RectTransform>().sizeDelta = new Vector2(170, 370);
-            newboat.transform.GetChild(1).GetComponent<RectTransform>().localPosition = new Vector2(0,175);
-            newboat.transform.GetChild(2).GetComponent<RectTransform>().localPosition = new Vector2(0, -175);
+            newboat.transform.GetChild(1).GetComponent<RectTransform>().localPosition = new Vector2(0,180);
+            newboat.transform.GetChild(2).GetComponent<RectTransform>().localPosition = new Vector2(0, -180);
             BoatImg.GetComponent<RectTransform>().sizeDelta = new Vector2(100, 320);
             newboat.GetComponent<BoatBehavoir>().TotalDistance = 1f;
         }
