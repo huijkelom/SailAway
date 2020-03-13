@@ -10,23 +10,28 @@ public class Stars : MonoBehaviour
     int __Score;
     [SerializeField] ScoreScreenController ScoreChecker;
     [SerializeField] Text _Text;
+    public GameObject _boat;
+    GameObject SpawnPlace;
+    public AudioSource audi;
     // Start is called before the first frame update
     public void AmountStars()
     {
         starsMin = Manager.minimaleZetten;
         __Score = ScoreChecker._Score;
         Debug.Log(__Score);
+        Debug.Log(starsMin);
+        StartCoroutine(instanceBoats());
         if (__Score < starsMin + 1)
         {
-            StartCoroutine(stars3());
+        //    StartCoroutine(stars3());
         }
         else if (__Score <= starsMin + 2)
         {
-            StartCoroutine(stars2());
+        //    StartCoroutine(stars2());
         }
         else
         {
-            StartCoroutine(stars1());
+        //    StartCoroutine(stars1());
         }
     }
 
@@ -35,34 +40,29 @@ public class Stars : MonoBehaviour
     {
         
     }
-    IEnumerator stars3()
+    IEnumerator instanceBoats()
     {
-        foreach (GameObject obj in _Stars)
+        float xaxis =0;
+        audi.Play();
+        for (int i = 0; i< __Score;i++)
         {
-            yield return new WaitForSeconds(1);
-            obj.SetActive(true);
+            float length = -5f+(i * 0.5f);
+            GameObject boat;
+            boat = Instantiate(_boat,new Vector3(length,xaxis,0),Quaternion.identity,gameObject.transform);
+            if(i>=starsMin)
+            {
+                boat.GetComponent<Image>().color = Color.red;
+            }
+            if(i>24)
+            {
+                xaxis = -1;
+            }
+            else if(i>49)
+            {
+                xaxis = -2;
+            }
+            yield return new WaitForSeconds(0.05f);
         }
-        StartCoroutine(_text());
-    }
-    IEnumerator stars2()
-    {
-        for (int i = 0; i < 2; i++)
-        {
-            yield return new WaitForSeconds(1);
-            _Stars[i].SetActive(true);
-        }
-        StartCoroutine(_text());
-    }
-    IEnumerator stars1()
-    {
-        yield return new WaitForSeconds(1);
-        _Stars[0].SetActive(true);
-        StartCoroutine(_text());
-    }
-
-    IEnumerator _text()
-    {
-        yield return new WaitForSeconds(1);
         _Text.gameObject.SetActive(true);
         if (starsMin != __Score)
         {
@@ -70,7 +70,7 @@ public class Stars : MonoBehaviour
         }
         else
         {
-            _Text.text = "Je hebt de beste score met " + starsMin  + " zetten!";
+            _Text.text = "Je hebt de beste score met " + starsMin + " zetten!";
         }
     }
 }

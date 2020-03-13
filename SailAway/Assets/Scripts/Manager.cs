@@ -76,7 +76,7 @@ public class Manager : MonoBehaviour
             LevelName = (_LevelName);
         }
         LevelNameText.text = "Level: " + (LevelName).ToString();
-        minimaleZetten = Levels[LevelName].minimaleZetten;
+        minimaleZetten = Levels[LevelName-1].minimaleZetten;
     }
 
     // Use this for initialization
