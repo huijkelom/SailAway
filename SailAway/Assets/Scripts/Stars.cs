@@ -13,6 +13,7 @@ public class Stars : MonoBehaviour
     public GameObject _boat;
     GameObject SpawnPlace;
     public AudioSource audi;
+    public Sprite redboat;
     // Start is called before the first frame update
     public void AmountStars()
     {
@@ -42,24 +43,32 @@ public class Stars : MonoBehaviour
     }
     IEnumerator instanceBoats()
     {
-        float xaxis =0;
+        float xaxis =1;
+        float back = -5.5f;
         audi.Play();
         for (int i = 0; i< __Score;i++)
         {
-            float length = -5f+(i * 0.5f);
+            float length = back +(i * 0.5f);
             GameObject boat;
             boat = Instantiate(_boat,new Vector3(length,xaxis,0),Quaternion.identity,gameObject.transform);
             if(i>=starsMin)
             {
-                boat.GetComponent<Image>().color = Color.red;
+                boat.GetComponent<Image>().sprite = redboat;
             }
-            if(i>24)
+            if(i>21)
+            {
+                xaxis = -0;
+                back = -17f;
+            }
+            else if(i>43)
             {
                 xaxis = -1;
+                back = -29f;
             }
-            else if(i>49)
+            else if (i > 65)
             {
                 xaxis = -2;
+                back = -41f;
             }
             yield return new WaitForSeconds(0.05f);
         }

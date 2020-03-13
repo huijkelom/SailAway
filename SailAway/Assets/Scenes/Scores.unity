@@ -1212,7 +1212,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: fa1551495ab5d77419d5f0c91984f8f2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 59e64b36e7b3f4a47b3e2addb91097fd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1237,7 +1237,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 856388291}
   m_LocalRotation: {x: -0, y: -0, z: -0.705591, w: 0.7086193}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -340}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 889076825}
@@ -1245,7 +1245,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -89.755005}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 932, y: 3}
+  m_AnchoredPosition: {x: 1029, y: 461}
   m_SizeDelta: {x: 100, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &889076824
@@ -1310,6 +1310,7 @@ MonoBehaviour:
   _Text: {fileID: 1634254551}
   _boat: {fileID: 856388291}
   audi: {fileID: 2071609793}
+  redboat: {fileID: 21300000, guid: f84ca46ba0da8ec47996a5efda5e8d61, type: 3}
 --- !u!1 &914896517
 GameObject:
   m_ObjectHideFlags: 0
