@@ -149,10 +149,20 @@ public class Pointbehavoir : MonoBehaviour, I_SmartwallInteractable
         Image.color = new Vector4(1,1,1,0.7f);
         for(int i =0; i<50;i++)
         {
-            Image.color = Color.Lerp(Image.color, new Vector4(1,1,1,0), 0.04f);
+            if (CanInteract == false)
+            {
+                Image.color = Color.Lerp(Image.color, new Vector4(1, 1, 1, 0), 0.04f);
+            }
+            else
+            {
+                Image.color = new Vector4(1, 1, 1, 1);
+            }
             yield return null;
         }
         Image.color = new Vector4(1, 1, 1, 1f);
-        Image.enabled = false;
+        if (CanInteract == false)
+        {
+            Image.enabled = false;
+        }
     }
 }

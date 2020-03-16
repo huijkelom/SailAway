@@ -14,7 +14,7 @@
   </GlobalGameSetting>
   <GlobalGameSetting>
     <Label>Level</Label>
-    <Value>1</Value>
+    <Value>2</Value>
     <PossibleValues>
       <string>1</string>
       <string>2</string>
@@ -25,7 +25,7 @@
       <string>7</string>
       <string>8</string>
     </PossibleValues>
-    <Default>1</Default>
+    <Default>2</Default>
   </GlobalGameSetting>
   <GlobalGameSetting>
     <Label>HS Reset</Label>

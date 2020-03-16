@@ -8,6 +8,7 @@ public class BoatBehavoir : MonoBehaviour, I_SmartwallInteractable
     void I_SmartwallInteractable.Hit(Vector3 hitPosition)
     {
         points();
+        StartCoroutine("Dontuseboats");
     }
     public LayerMask layer;
     int stop = 0;
@@ -18,9 +19,9 @@ public class BoatBehavoir : MonoBehaviour, I_SmartwallInteractable
     [SerializeField] GameObject pointOrginBack;
     public bool CanUse;
 
-    void SettingActive(Vector2 Direction,GameObject pointOrgin, bool frontOrBack)
+    void SettingActive(Vector2 Direction, GameObject pointOrgin, bool frontOrBack)
     {
-        if (GetComponent<RectTransform>().sizeDelta == new Vector2(100,300)&& SetRight == false)
+        if (GetComponent<RectTransform>().sizeDelta == new Vector2(100, 300) && SetRight == false)
         {
             pointOrginFront.transform.position += gameObject.transform.TransformDirection(Vector2.up / 2);
             pointOrginBack.transform.position += gameObject.transform.TransformDirection(Vector2.down / 2);
@@ -30,9 +31,9 @@ public class BoatBehavoir : MonoBehaviour, I_SmartwallInteractable
         Vector2 fwd = transform.TransformDirection(Vector2.up);
         Ray LineForward = new Ray(pointOrgin.transform.position, fwd);
         Debug.DrawRay(LineForward.origin, LineForward.direction, Color.yellow, 5);
-        foreach (RaycastHit2D hit in Physics2D.RaycastAll(pointOrgin.transform.position, Direction, Mathf.Infinity,layer))
+        foreach (RaycastHit2D hit in Physics2D.RaycastAll(pointOrgin.transform.position, Direction, Mathf.Infinity, layer))
         {
-            if (stop <1)
+            if (stop < 1)
             {
                 Activate(hit, frontOrBack);
             }
@@ -57,7 +58,7 @@ public class BoatBehavoir : MonoBehaviour, I_SmartwallInteractable
         }
         else if (hit.transform.tag == "point")
         {
-            hit.transform.GetComponent<Pointbehavoir>().Activate(gameObject,_frontOrBack);
+            hit.transform.GetComponent<Pointbehavoir>().Activate(gameObject, _frontOrBack);
         }
     }
     public void points()
@@ -89,9 +90,9 @@ public class BoatBehavoir : MonoBehaviour, I_SmartwallInteractable
     }
     public IEnumerator Working()
     {
-         CanUse = false;
-         yield return new WaitForSeconds(0.3f);
-         CanUse = true;
+        CanUse = false;
+        yield return new WaitForSeconds(0.3f);
+        CanUse = true;
     }
     public void setfalse()
     {
@@ -103,5 +104,25 @@ public class BoatBehavoir : MonoBehaviour, I_SmartwallInteractable
         transform.localScale = new Vector2(0.9f, 0.9f);
         yield return new WaitForSeconds(0.1f);
         transform.localScale = oSize;
+    }
+    public IEnumerator Dontuseboats()
+    {
+        foreach (GameObject AllBoats in GameObject.FindGameObjectsWithTag("boat"))
+        {
+            AllBoats.GetComponent<BoxCollider2D>().enabled = false;
+        }
+        foreach (GameObject AllBoats in GameObject.FindGameObjectsWithTag("point"))
+        {
+            AllBoats.GetComponent<BoxCollider2D>().enabled = false;
+        }
+        yield return new WaitForSeconds(0.3f);
+        foreach (GameObject AllBoats in GameObject.FindGameObjectsWithTag("boat"))
+        {
+            AllBoats.GetComponent<BoxCollider2D>().enabled = true;
+        }
+        foreach (GameObject AllBoats in GameObject.FindGameObjectsWithTag("point"))
+        {
+            AllBoats.GetComponent<BoxCollider2D>().enabled = true;
+        }
     }
 }

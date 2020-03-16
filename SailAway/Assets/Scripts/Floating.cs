@@ -18,7 +18,7 @@ public class Floating : MonoBehaviour {
 
     IEnumerator Bigger()
     {
-        while (transform.localScale.x <= 1.05f)
+        while (transform.localScale.x <= 1.016f)
         {
             transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(1.027f, 1.027f), Time.deltaTime * time);
             yield return null;
@@ -28,7 +28,7 @@ public class Floating : MonoBehaviour {
 
     IEnumerator Smaller()
     {
-        while (transform.localScale.x >= 0.95f)
+        while (transform.localScale.x >= 0.988f)
         {
             transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(0.974f, 0.974f), Time.deltaTime * time);
             yield return null;

@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 12124562}
   - component: {fileID: 12124564}
   - component: {fileID: 12124563}
+  - component: {fileID: 12124565}
   m_Layer: 0
   m_Name: BoatImg
   m_TagString: Untagged
@@ -194,6 +195,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 12124561}
   m_CullTransparentMesh: 0
+--- !u!114 &12124565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12124561}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5af91fa1c7e9a44cb1b5781a7ec1d82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterPlane: {fileID: 0}
+  distanceIndex: 0
 --- !u!1 &72447768
 GameObject:
   m_ObjectHideFlags: 0
@@ -2009,7 +2024,7 @@ PrefabInstance:
     - target: {fileID: 1487633214657388522, guid: d21d40e053a0ceb499904da364436a28,
         type: 3}
       propertyPath: SettingToMake.Array.data[1].Value
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1487633214657388522, guid: d21d40e053a0ceb499904da364436a28,
         type: 3}
@@ -2034,7 +2049,7 @@ PrefabInstance:
     - target: {fileID: 1487633214657388522, guid: d21d40e053a0ceb499904da364436a28,
         type: 3}
       propertyPath: SettingToMake.Array.data[1].Default
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1487633214657388522, guid: d21d40e053a0ceb499904da364436a28,
         type: 3}
@@ -5731,7 +5746,6 @@ GameObject:
   m_Component:
   - component: {fileID: 765299814}
   - component: {fileID: 765299816}
-  - component: {fileID: 765299820}
   - component: {fileID: 765299815}
   - component: {fileID: 765299817}
   - component: {fileID: 765299818}
@@ -5848,20 +5862,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 119, y: 219}
   m_EdgeRadius: 0
---- !u!114 &765299820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 765299813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5af91fa1c7e9a44cb1b5781a7ec1d82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waterPlane: {fileID: 0}
-  distanceIndex: 0
 --- !u!82 &765299821
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8012,7 +8012,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: 118.865}
+  m_AnchoredPosition: {x: -0, y: 119.5}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1376813897
@@ -9654,7 +9654,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -116.6}
+  m_AnchoredPosition: {x: 0, y: -119.5}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1947856406
