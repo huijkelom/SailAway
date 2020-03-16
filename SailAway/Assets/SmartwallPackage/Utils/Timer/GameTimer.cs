@@ -3,26 +3,45 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(AudioSource), typeof(Image))]
 public class GameTimer : MonoBehaviour
 {
+    [Tooltip("Time limit can be overwritten by the setting file if it contains a setting from Time.")]
+    public float TimeLimit;
+
+    [Space]
     public Text LabelOfTimer;
     public Image Gage;
-    /// <summary>
-    /// Time limit can be overwritten by the setting file if it contains a setting from Time.
-    /// </summary>
-    public float TimeLimit;
-    public Color ColorWhenOutOfTime;
-    public float PercentageOutOfTime = 15;
+
+    [Space][Tooltip("The amount of seconds when the timer needs to execute certain behaviours.")]
+    public int AlmostFinishedTime = 5;
+    public Color AlmostFinishedColor;
+
+    [Space]
+    public Image _FinishedFade;
+    public UnityEvent TimerRanOut = new UnityEvent();
+
+    private AudioSource _AlmostFinishedAudio;
+    private AudioSource _FinishedAudio;
+
     private float _StartTime;
     private Color _ColourStart;
     private bool Paused = false;
-    public UnityEvent TimerRanOut = new UnityEvent();
+
+    public void SetState(bool state)
+    {
+        gameObject.SetActive(state);
+    }
 
     /// <summary>
     /// Start running the set timer.
     /// </summary>
     public void StartTimer()
     {
+        AudioSource[] _audioSources = GetComponents<AudioSource>();
+        _AlmostFinishedAudio = _audioSources[0];
+        _FinishedAudio = _audioSources[1];
+
         _StartTime = Time.time;
         LabelOfTimer.color = _ColourStart;
         StartCoroutine("RunTimer");
@@ -52,17 +71,16 @@ public class GameTimer : MonoBehaviour
                 Debug.LogWarning("L_Text | Start | Text changer has no label to change but it has found a Text class on its gameobject: " + gameObject.name);
             }
         }
-        _ColourStart = LabelOfTimer.color;
-    }
 
-    private void Start()
-    {
-        //load time setting from settings file, if there is not Time setting in the file the inspector value is used.
-        string[] temp = GlobalGameSettings.GetSetting("Playtime").Split(' ');
-        if (temp.Length > 1)
+        _ColourStart = LabelOfTimer.color;
+
+        //load time setting from settings file; if there is no time setting in the file, the inspector value is used instead.
+        string[] setting = GlobalGameSettings.GetSetting("Playtime").Split(' ');
+        if (setting.Length > 0)
         {
-            TimeLimit = int.Parse(temp[0]);
+            TimeLimit = int.Parse(setting[0]);
         }
+
         int minutes = (int)(TimeLimit / 60);
         int seconds = (int)(TimeLimit % 60);
         LabelOfTimer.text = minutes.ToString("D2") + ":" + seconds.ToString("D2");
@@ -71,28 +89,45 @@ public class GameTimer : MonoBehaviour
     IEnumerator RunTimer()
     {
         float t = TimeLimit;
+        float redFade = 0;
+        bool finale = false;
+
         while (t > 0)
         {
             if (!Paused)
             {
+                int minutes = (int)(t / 60);
+                int seconds = (int)(t % 60);
+                Gage.fillAmount = t / TimeLimit;
+                LabelOfTimer.text = minutes.ToString("D2") + ":" + seconds.ToString("D2");
+
+                if (t < AlmostFinishedTime)
+                {
+                    redFade += Time.deltaTime / AlmostFinishedTime;
+                    LabelOfTimer.color = Color.Lerp(_ColourStart, AlmostFinishedColor, redFade);
+
+                    if (!finale)
+                    {
+                        _AlmostFinishedAudio.Play();
+                        finale = true;
+                    }
+                }
+
                 t -= Time.deltaTime;
             }
-            if(t <= 0)
-            {
-                TimerRanOut.Invoke();
-                t = 0;
-            }
-            int minutes = (int)(t / 60);
-            int seconds = (int)(t % 60);
-            Gage.fillAmount = t / TimeLimit;
 
-            LabelOfTimer.text = minutes.ToString("D2") + ":" + seconds.ToString("D2");
-            if (t < (TimeLimit / PercentageOutOfTime))
-            {
-                float factor = t / PercentageOutOfTime;
-                LabelOfTimer.color = Color.Lerp(ColorWhenOutOfTime, _ColourStart, factor);
-            }
-            yield return null;
+            yield return null;          
         }
+
+        t = 0;
+        Color c = _FinishedFade.color;
+        c.a = 0.5f;
+        _FinishedFade.color = c;
+        _FinishedAudio.Play();
+        yield return new WaitForSeconds(0.5f);
+        //make sure the player isn't able to hit stuff anymore
+        BlobInputProcessing.SetState(false);
+        yield return new WaitForSeconds(1.5f);
+        TimerRanOut.Invoke();
     }
 }

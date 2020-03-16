@@ -10,21 +10,24 @@ using UnityEngine.UI;
 public class SWButton : MonoBehaviour, I_SmartwallInteractable
 {
     Button _ButtonImOn;
-    //Animator _Anime;
+    Animator _Anime;
     AudioSource _AS;
     public string AnimationTriggerName = "Clicked";
 
     private void Awake()
     {
         _ButtonImOn = gameObject.GetComponent<Button>();
-        //_Anime = gameObject.GetComponent<Animator>();
+        _Anime = gameObject.GetComponent<Animator>();
         _AS = gameObject.GetComponent<AudioSource>();
     }
     
     public void Hit(Vector3 location)
     {
-        _AS?.Play();
-        //_Anime?.SetTrigger(AnimationTriggerName);
         _ButtonImOn.onClick.Invoke();
+
+        if (_AS)
+            _AS.Play();
+        if (_Anime)
+            _Anime.SetTrigger(AnimationTriggerName);
     }
 }

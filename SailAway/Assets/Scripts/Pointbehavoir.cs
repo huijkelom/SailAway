@@ -74,13 +74,18 @@ public class Pointbehavoir : MonoBehaviour, I_SmartwallInteractable
         _text.text = ": " + controller.Score;
         while (Vector2.Distance(gameObject.transform.position, pointtopoint) >= TotalDistance && boat !=null)
         {
+            float speed =30;
+            if(Mathf.Abs(Vector2.Distance(gameObject.transform.position, pointtopoint) - TotalDistance) < 0.2f)
+            {
+                speed = 150;
+            }
             if (frontOrBack == true)
             {
-                boat.transform.position += boat.transform.TransformDirection(Vector2.up / 30);
+                boat.transform.position += boat.transform.TransformDirection(Vector2.up / speed);
             }
             else
             {
-                boat.transform.position -= boat.transform.TransformDirection(Vector2.up / 30);
+                boat.transform.position -= boat.transform.TransformDirection(Vector2.up / speed);
             }
             pointtopoint = boat.transform.position;
             yield return null;
