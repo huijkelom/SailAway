@@ -145,6 +145,11 @@ public class Pointbehavoir : MonoBehaviour, I_SmartwallInteractable
     }
     private void ToScores()
     {
+        if (Manager.off_LEvelName == 0)
+        {
+            Manager._LevelName = (controller.LevelName-1);
+            Manager.off_LEvelName = 1;
+        }
         ScoreScreenController.MoveToScores(new List<int>(new int[1] { controller.Score,}), controller.LevelName);
     }
 

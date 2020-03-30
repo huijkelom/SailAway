@@ -52,7 +52,7 @@ public class FishBehaviour : MonoBehaviour
     IEnumerator FishEnter()
     {
         transform.position = place;
-        while(Vector3.Distance(transform.position,place)<15)
+        while(Vector3.Distance(transform.position,place)<20)
         {
             transform.position -= movingTowards;
             //transform.

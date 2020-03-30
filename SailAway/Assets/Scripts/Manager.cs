@@ -16,6 +16,7 @@ public class Manager : MonoBehaviour
     [SerializeField] GameObject icon;
     public int LevelName;
     public static int _LevelName;
+    public static int off_LEvelName; 
     public static int minimaleZetten;
     public int Score;
     public int _Difficulty =20;
@@ -65,18 +66,21 @@ public class Manager : MonoBehaviour
             AllGrids.GetComponent<Pointbehavoir>().Image.enabled = false;
             AllGrids.GetComponent<Pointbehavoir>().CanInteract = false;
         }
-        if (_LevelName == 0)
+        if (off_LEvelName == 0)
         {
             StartLevel((Level-1 )+ _Difficulty);
             LevelName = ((Level) + _Difficulty);
+            LevelNameText.text = "Level: " + (LevelName).ToString();
+
         }
         else
         {
-            StartLevel(_LevelName -1);
+            StartLevel(_LevelName );
             LevelName = (_LevelName);
+            LevelNameText.text = "Level: " + (LevelName+1).ToString();
+
         }
-        LevelNameText.text = "Level: " + (LevelName).ToString();
-        minimaleZetten = Levels[LevelName-1].minimaleZetten;
+        minimaleZetten = Levels[LevelName].minimaleZetten;
     }
 
     // Use this for initialization
@@ -111,7 +115,7 @@ public class Manager : MonoBehaviour
             GameObject BoatImg = newboat.transform.GetChild(0).gameObject;
             BoatImg.GetComponent<Image>().sprite = LongSprite;
             newboat.GetComponent<Image>().sprite = LongSpriteGlow;
-            newboat.GetComponent<BoxCollider2D>().size = new Vector2(119, 335);
+            newboat.GetComponent<BoxCollider2D>().size = new Vector2(119, 369);
             newboat.GetComponent<RectTransform>().sizeDelta = new Vector2(170, 370);
             newboat.transform.GetChild(1).GetComponent<RectTransform>().localPosition = new Vector2(0,180f);
             newboat.transform.GetChild(2).GetComponent<RectTransform>().localPosition = new Vector2(0, -180f);

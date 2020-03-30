@@ -67,6 +67,7 @@ public class ScoreScreenController : MonoBehaviour
     }
     void Start()
     {
+        Debug.Log(Manager._LevelName);
         _Score = Scores[0];
         _stars.AmountStars();
         i++;
@@ -131,14 +132,14 @@ public class ScoreScreenController : MonoBehaviour
             }
         }
         Invoke("EnableReplay", BarRiseAnimationTime + 1f);
-        if(Manager._LevelName > 38)
+        if(Manager._LevelName == 39)
         {
             LeftButton.color = new Vector4(0.5f, 0.5f, 0.5f, 1);
             LeftButton.GetComponentInChildren<Image>().color = new Vector4(0.5f, 0.5f, 0.5f, 1);
             LeftButton.GetComponent<BoxCollider2D>().enabled = false;
             LeftButton.GetComponent<Button>().enabled = false;
         }
-        if (Manager._LevelName < 1)
+        if (Manager._LevelName ==0)
         {
             RightButton.color = new Vector4(0.5f, 0.5f, 0.5f, 1);
             RightButton.GetComponentInChildren<Image>().color = new Vector4(0.5f, 0.5f, 0.5f, 1);
@@ -254,9 +255,9 @@ public class ScoreScreenController : MonoBehaviour
     }
     public void BT_Replay_ClickedPrevious()
     {
-        if (Manager._LevelName > -1)
+        if (Manager._LevelName > 0)
         {
-            Manager._LevelName = IndexOfSceneToMoveTo - 1;
+            Manager._LevelName--;
             SceneManager.LoadScene("SampleScene");
         }
         else
@@ -267,9 +268,9 @@ public class ScoreScreenController : MonoBehaviour
     }
     public void BT_Replay_ClickedNext()
     {
-        if (Manager._LevelName < 40)
+        if (Manager._LevelName < 38)
         {
-            Manager._LevelName = IndexOfSceneToMoveTo + 1;
+            Manager._LevelName++;
             SceneManager.LoadScene("SampleScene");
 
         }
