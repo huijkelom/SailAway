@@ -71,6 +71,7 @@ public class Manager : MonoBehaviour
             StartLevel((Level-1 )+ _Difficulty);
             LevelName = ((Level) + _Difficulty);
             LevelNameText.text = "Level: " + (LevelName).ToString();
+            minimaleZetten = Levels[LevelName - 1].minimaleZetten;
 
         }
         else
@@ -78,9 +79,10 @@ public class Manager : MonoBehaviour
             StartLevel(_LevelName );
             LevelName = (_LevelName);
             LevelNameText.text = "Level: " + (LevelName+1).ToString();
+            minimaleZetten = Levels[LevelName].minimaleZetten;
+
 
         }
-        minimaleZetten = Levels[LevelName].minimaleZetten;
     }
 
     // Use this for initialization
@@ -115,12 +117,12 @@ public class Manager : MonoBehaviour
             GameObject BoatImg = newboat.transform.GetChild(0).gameObject;
             BoatImg.GetComponent<Image>().sprite = LongSprite;
             newboat.GetComponent<Image>().sprite = LongSpriteGlow;
-            newboat.GetComponent<BoxCollider2D>().size = new Vector2(119, 369);
+            newboat.GetComponent<BoxCollider2D>().size = new Vector2(119, 359);
             newboat.GetComponent<RectTransform>().sizeDelta = new Vector2(170, 370);
-            newboat.transform.GetChild(1).GetComponent<RectTransform>().localPosition = new Vector2(0,180f);
-            newboat.transform.GetChild(2).GetComponent<RectTransform>().localPosition = new Vector2(0, -180f);
+            newboat.transform.GetChild(1).GetComponent<RectTransform>().localPosition = new Vector2(0,180.1f);
+            newboat.transform.GetChild(2).GetComponent<RectTransform>().localPosition = new Vector2(0, -180.1f);
             BoatImg.GetComponent<RectTransform>().sizeDelta = new Vector2(100, 320);
-            newboat.GetComponent<BoatBehavoir>().TotalDistance = 1f;
+            newboat.GetComponent<BoatBehavoir>().TotalDistance = 1;
         }
         if (MainBoat == true)
         {

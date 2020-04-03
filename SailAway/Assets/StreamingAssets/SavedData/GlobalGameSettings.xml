@@ -2,19 +2,19 @@
 <ArrayOfGlobalGameSetting xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <GlobalGameSetting>
     <Label>Difficulty</Label>
-    <Value>Starter</Value>
+    <Value>Very Easy</Value>
     <PossibleValues>
-      <string>Starter</string>
+      <string>Very Easy</string>
       <string>Easy</string>
       <string>Medium</string>
       <string>Hard</string>
-      <string>Expert</string>
+      <string>Very Hard</string>
     </PossibleValues>
-    <Default>Starter</Default>
+    <Default>Very Easy</Default>
   </GlobalGameSetting>
   <GlobalGameSetting>
     <Label>Level</Label>
-    <Value>6</Value>
+    <Value>1</Value>
     <PossibleValues>
       <string>1</string>
       <string>2</string>
@@ -25,15 +25,6 @@
       <string>7</string>
       <string>8</string>
     </PossibleValues>
-    <Default>6</Default>
-  </GlobalGameSetting>
-  <GlobalGameSetting>
-    <Label>HS Reset</Label>
-    <Value>No</Value>
-    <PossibleValues>
-      <string>Yes</string>
-      <string>No</string>
-    </PossibleValues>
-    <Default>No</Default>
+    <Default>1</Default>
   </GlobalGameSetting>
 </ArrayOfGlobalGameSetting>

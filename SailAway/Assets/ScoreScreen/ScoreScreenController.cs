@@ -250,7 +250,7 @@ public class ScoreScreenController : MonoBehaviour
 
     public void BT_Replay_ClickedRestart()
     {
-        Manager._LevelName = IndexOfSceneToMoveTo;
+        //Manager._LevelName = Manager._LevelName;
         SceneManager.LoadScene("SampleScene");
     }
     public void BT_Replay_ClickedPrevious()
@@ -268,7 +268,7 @@ public class ScoreScreenController : MonoBehaviour
     }
     public void BT_Replay_ClickedNext()
     {
-        if (Manager._LevelName < 38)
+        if (Manager._LevelName <= 39)
         {
             Manager._LevelName++;
             SceneManager.LoadScene("SampleScene");

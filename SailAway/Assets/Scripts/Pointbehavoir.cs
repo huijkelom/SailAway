@@ -75,9 +75,9 @@ public class Pointbehavoir : MonoBehaviour, I_SmartwallInteractable
         while (Vector2.Distance(gameObject.transform.position, pointtopoint) >= TotalDistance && boat !=null)
         {
             float speed =30;
-            if(Mathf.Abs(Vector2.Distance(gameObject.transform.position, pointtopoint) - TotalDistance) < 0.2f)
+            if(Mathf.Abs(Vector2.Distance(gameObject.transform.position, pointtopoint) - TotalDistance) < 0.15f)
             {
-                speed = 150;
+                speed = 230;
             }
             if (frontOrBack == true)
             {

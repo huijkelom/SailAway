@@ -81,11 +81,11 @@ public class Stars : MonoBehaviour
         _Text.gameObject.SetActive(true);
         if (starsMin != __Score)
         {
-            _Text.text = "Jou score is " + __Score + ". De beste score is " + starsMin + "!";
+            _Text.text = "Jou aantal zetten zijn " + __Score + ". De minste aantal zetten zijn " + starsMin + "!";
         }
         else
         {
-            _Text.text = "Je hebt de beste score met " + starsMin + " zetten!";
+            _Text.text = "Je hebt de minst aantal zetten met in totaal " + starsMin + "!";
         }
     }
 }
