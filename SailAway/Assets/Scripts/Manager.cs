@@ -26,7 +26,7 @@ public class Manager : MonoBehaviour
         string Difficulty = GlobalGameSettings.GetSetting("Difficulty");
         switch (Difficulty)
         {
-            case "Starter":
+            case "Very Easy":
                 _Difficulty = 0;
                 break;
             case "Easy":
@@ -38,7 +38,7 @@ public class Manager : MonoBehaviour
             case "Hard":
                 _Difficulty = 24;
                 break;
-            case "Expert":
+            case "Very Hard":
                 _Difficulty = 32;
                 break;
         }
@@ -70,15 +70,44 @@ public class Manager : MonoBehaviour
         {
             StartLevel((Level-1 )+ _Difficulty);
             LevelName = ((Level) + _Difficulty);
-            LevelNameText.text = "Level: " + (LevelName).ToString();
+            LevelNameText.text = Difficulty +":" + Level;
             minimaleZetten = Levels[LevelName - 1].minimaleZetten;
 
         }
         else
         {
+            int _lev = Level;
             StartLevel(_LevelName );
             LevelName = (_LevelName);
-            LevelNameText.text = "Level: " + (LevelName+1).ToString();
+            int _switch =0;
+            _lev = (LevelName + 1);
+            Debug.Log(_lev);
+            while(_lev >0)
+            {
+                _lev = _lev- 8;
+                _switch++;
+            }
+            switch (_switch)
+            {
+                case 1:
+                    Difficulty = "Very Easy";
+                    break;
+                case 2:
+                    Difficulty = "Easy";
+                    break;
+                case 3:
+                    Difficulty = "Medium";
+                    break;
+                case 4:
+                    Difficulty = "Hard";
+                    break;
+                case 5:
+                    Difficulty = "Very Hard";
+                    break;
+            }
+            Debug.Log(_lev);
+            _lev = _lev+8;
+            LevelNameText.text = Difficulty + ":" + _lev;
             minimaleZetten = Levels[LevelName].minimaleZetten;
 
 

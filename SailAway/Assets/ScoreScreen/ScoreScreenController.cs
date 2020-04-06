@@ -67,7 +67,6 @@ public class ScoreScreenController : MonoBehaviour
     }
     void Start()
     {
-        Debug.Log(Manager._LevelName);
         _Score = Scores[0];
         _stars.AmountStars();
         i++;
