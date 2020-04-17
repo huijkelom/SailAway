@@ -26,7 +26,7 @@ public class Manager : MonoBehaviour
         string Difficulty = GlobalGameSettings.GetSetting("Difficulty");
         switch (Difficulty)
         {
-            case "Very Easy":
+            case "Beginner":
                 _Difficulty = 0;
                 break;
             case "Easy":
@@ -38,7 +38,7 @@ public class Manager : MonoBehaviour
             case "Hard":
                 _Difficulty = 24;
                 break;
-            case "Very Hard":
+            case "Expert":
                 _Difficulty = 32;
                 break;
         }
@@ -90,7 +90,7 @@ public class Manager : MonoBehaviour
             switch (_switch)
             {
                 case 1:
-                    Difficulty = "Very Easy";
+                    Difficulty = "Beginner";
                     break;
                 case 2:
                     Difficulty = "Easy";
@@ -102,7 +102,7 @@ public class Manager : MonoBehaviour
                     Difficulty = "Hard";
                     break;
                 case 5:
-                    Difficulty = "Very Hard";
+                    Difficulty = "Expert";
                     break;
             }
             Debug.Log(_lev);

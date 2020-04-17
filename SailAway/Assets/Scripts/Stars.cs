@@ -56,25 +56,25 @@ public class Stars : MonoBehaviour
             {
                 boat.GetComponent<Image>().sprite = redboat;
             }
-            if(i>21)
+            if(i>82)
             {
-                xaxis = -0;
-                back = -17f;
+                GameObject _arrow = Instantiate(arrow, new Vector3((length + 1), xaxis, 0), Quaternion.identity, gameObject.transform);
+                break;
             }
-            else if(i>43)
-            {
-                xaxis = -1;
-                back = -29f;
-            }
-            else if (i > 65)
+            else if(i>65)
             {
                 xaxis = -2;
                 back = -41f;
             }
-            else if(i>82)
+            else if (i > 43)
             {
-                GameObject _arrow = Instantiate(arrow, new Vector3((length+1), xaxis, 0), Quaternion.identity, gameObject.transform);
-                break;
+                xaxis = -1;
+                back = -29f;
+            }
+            else if(i>21)
+            {
+                xaxis = -0;
+                back = -17f;
             }
             yield return new WaitForSeconds(0.05f);
         }

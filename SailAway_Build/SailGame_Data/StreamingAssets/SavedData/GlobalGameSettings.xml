@@ -2,15 +2,15 @@
 <ArrayOfGlobalGameSetting xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <GlobalGameSetting>
     <Label>Difficulty</Label>
-    <Value>Easy</Value>
+    <Value>Beginner</Value>
     <PossibleValues>
-      <string>Very Easy</string>
+      <string>Beginner</string>
       <string>Easy</string>
       <string>Medium</string>
       <string>Hard</string>
       <string>Very Hard</string>
     </PossibleValues>
-    <Default>Very Easy</Default>
+    <Default>Expert</Default>
   </GlobalGameSetting>
   <GlobalGameSetting>
     <Label>Level</Label>
