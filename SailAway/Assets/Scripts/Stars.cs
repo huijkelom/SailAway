@@ -42,6 +42,7 @@ public class Stars : MonoBehaviour
     {
         
     }
+
     IEnumerator instanceBoats()
     {
         float xaxis =1;
@@ -56,20 +57,20 @@ public class Stars : MonoBehaviour
             {
                 boat.GetComponent<Image>().sprite = redboat;
             }
-            if(i>82)
+            if(i>88)
             {
                 GameObject _arrow = Instantiate(arrow, new Vector3((length + 1), xaxis, 0), Quaternion.identity, gameObject.transform);
                 break;
             }
-            else if(i>65)
+            else if(i>67)
             {
                 xaxis = -2;
-                back = -41f;
+                back = -40f;
             }
-            else if (i > 43)
+            else if (i > 44)
             {
                 xaxis = -1;
-                back = -29f;
+                back = -28.5f;
             }
             else if(i>21)
             {
@@ -81,7 +82,7 @@ public class Stars : MonoBehaviour
         _Text.gameObject.SetActive(true);
         if (starsMin != __Score)
         {
-            _Text.text = "Jou aantal zetten zijn " + __Score + ". De minste aantal zetten zijn " + starsMin + "!";
+            _Text.text = "Gehaald in " + __Score + " zetten. De minste aantal zetten zijn " + starsMin + "!";
         }
         else
         {

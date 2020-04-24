@@ -8,9 +8,9 @@
       <string>Easy</string>
       <string>Medium</string>
       <string>Hard</string>
-      <string>Very Hard</string>
+      <string>Expert</string>
     </PossibleValues>
-    <Default>Expert</Default>
+    <Default>Beginner</Default>
   </GlobalGameSetting>
   <GlobalGameSetting>
     <Label>Level</Label>
