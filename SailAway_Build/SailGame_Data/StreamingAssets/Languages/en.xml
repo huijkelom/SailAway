@@ -2,6 +2,9 @@
 <LanguageContainer xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <TextEntries>
     <Text>Hello and welcome</Text>
+	<!--1--><Text>Solved in </Text>
+     <!--2--><Text> turns. The minimal amount of turns is </Text>
+     <!--3--><Text>You're finished with the least amount of turns with a total of </Text>
   </TextEntries>
   <Images>
 	<Path>StreamingAssets\Languages\en\Logo.png</Path>

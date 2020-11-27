@@ -79,14 +79,23 @@ public class Stars : MonoBehaviour
             }
             yield return new WaitForSeconds(0.05f);
         }
+        LanguageController.LanguageChangedEvent += GetTextFromLanguageControllerAndPlaceItOnLabel;
+        if (!LanguageController.LanguageLoaded.Equals(string.Empty))
+        {
+            GetTextFromLanguageControllerAndPlaceItOnLabel();
+        }
+    }
+
+    private void GetTextFromLanguageControllerAndPlaceItOnLabel()
+    {
         _Text.gameObject.SetActive(true);
         if (starsMin != __Score)
         {
-            _Text.text = "Gehaald in " + __Score + " zetten. De minste aantal zetten zijn " + starsMin + "!";
+            _Text.text = LanguageController.GetText(1) + __Score.ToString() + LanguageController.GetText(2) + starsMin + "!";
         }
         else
         {
-            _Text.text = "Je hebt de minst aantal zetten met in totaal " + starsMin + "!";
+            _Text.text = LanguageController.GetText(3) + starsMin + "!";
         }
     }
 }

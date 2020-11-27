@@ -2,6 +2,10 @@
 <LanguageContainer xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <TextEntries>
     <Text>Welkom</Text>
+	<!--1--><Text>Opgelost in </Text>
+     <!--2--><Text> zetten. Het mininum aantal zetten is </Text>
+     <!--3--><Text>Je hebt de minst aantal zetten met in totaal </Text>
+
   </TextEntries>
   <Images>
   	<Path>StreamingAssets\Languages\nl\Logo.png</Path>
