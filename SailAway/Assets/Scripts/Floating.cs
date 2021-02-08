@@ -21,7 +21,7 @@ public class Floating : MonoBehaviour {
         while (transform.localScale.x <= 0.919f)
         {
             transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(0.920f, 0.920f), Time.deltaTime * time);
-            yield return null;
+            yield return new WaitForSeconds(0.0166666666666667f);
         }
         StartCoroutine(Smaller());
     }
@@ -31,7 +31,8 @@ public class Floating : MonoBehaviour {
         while (transform.localScale.x >= 0.881f)
         {
             transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(0.880f, 0.880f), Time.deltaTime * time);
-            yield return null;
+            yield return new WaitForSeconds(0.0166666666666667f);
+
         }
         StartCoroutine(Bigger());
     }

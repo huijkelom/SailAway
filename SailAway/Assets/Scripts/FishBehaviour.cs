@@ -56,7 +56,7 @@ public class FishBehaviour : MonoBehaviour
         {
             transform.position -= movingTowards;
             //transform.
-            yield return null; 
+            yield return new WaitForSeconds(0.0166666666666667f);
         }
         StartCoroutine("_Wait");
     }
@@ -82,6 +82,6 @@ public class FishBehaviour : MonoBehaviour
             ObjectMove2 += 0.00004f;
         }
         //transform.Translate(Vector3.forward * (ObjectMove2));
-        yield return null;
+        yield return new WaitForSeconds(0.0166666666666667f);
     }
 }

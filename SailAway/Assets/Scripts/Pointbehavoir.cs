@@ -88,7 +88,7 @@ public class Pointbehavoir : MonoBehaviour, I_SmartwallInteractable
                 boat.transform.position -= boat.transform.TransformDirection(Vector2.up / speed);
             }
             pointtopoint = boat.transform.position;
-            yield return null;
+            yield return new WaitForSeconds(0.0166666666666667f);
         }
         if (boat != null)
         {
@@ -138,7 +138,7 @@ public class Pointbehavoir : MonoBehaviour, I_SmartwallInteractable
                 {
                     break;
                 }
-                yield return null;
+                yield return new WaitForSeconds(0.0166666666666667f);
             }
             Invoke("ToScores", 2.5f);
         }
@@ -167,7 +167,7 @@ public class Pointbehavoir : MonoBehaviour, I_SmartwallInteractable
             {
                 Image.color = new Vector4(1, 1, 1, 1);
             }
-            yield return null;
+            yield return new WaitForSeconds(0.0166666666666667f);
         }
         Image.color = new Vector4(1, 1, 1, 1f);
         if (CanInteract == false)
