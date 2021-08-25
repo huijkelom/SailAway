@@ -37,12 +37,6 @@ public class Stars : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     IEnumerator instanceBoats()
     {
         float xaxis =1;

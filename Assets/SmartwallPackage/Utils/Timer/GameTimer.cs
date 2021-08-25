@@ -3,11 +3,12 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(AudioSource), typeof(Image))]
+[RequireComponent(typeof(Image))]
 public class GameTimer : MonoBehaviour
 {
     [Tooltip("Time limit can be overwritten by the setting file if it contains a setting from Time.")]
     public float TimeLimit;
+    public float TimeRemaining;
 
     [Space]
     public Text LabelOfTimer;
@@ -21,12 +22,9 @@ public class GameTimer : MonoBehaviour
     public Image _FinishedFade;
     public UnityEvent TimerRanOut = new UnityEvent();
 
-    private AudioSource _AlmostFinishedAudio;
-    private AudioSource _FinishedAudio;
-
-    private float _StartTime;
-    private Color _ColourStart;
-    private bool Paused = false;
+    protected float _StartTime;
+    protected Color _ColourStart;
+    protected bool Paused = false;
 
     public void SetState(bool state)
     {
@@ -36,12 +34,23 @@ public class GameTimer : MonoBehaviour
     /// <summary>
     /// Start running the set timer.
     /// </summary>
-    public void StartTimer()
+    public virtual void StartTimer()
     {
-        AudioSource[] _audioSources = GetComponents<AudioSource>();
-        _AlmostFinishedAudio = _audioSources[0];
-        _FinishedAudio = _audioSources[1];
+        StopCoroutine("RunTimer");
 
+        _StartTime = Time.time;
+        LabelOfTimer.color = _ColourStart;
+        StartCoroutine("RunTimer");
+    }
+
+    /// <summary>
+    /// Starts the timer with a custom time.
+    /// </summary>
+    public void StartTimer(float time)
+    {
+        StopCoroutine("RunTimer");
+
+        TimeLimit = time;
         _StartTime = Time.time;
         LabelOfTimer.color = _ColourStart;
         StartCoroutine("RunTimer");
@@ -55,7 +64,7 @@ public class GameTimer : MonoBehaviour
         Paused = pause;
     }
 
-    void Awake()
+    protected virtual void Awake()
     {
         //Check if a Text class has been linked
         if (LabelOfTimer == null)
@@ -76,7 +85,7 @@ public class GameTimer : MonoBehaviour
 
         //load time setting from settings file; if there is no time setting in the file, the inspector value is used instead.
         string[] setting = GlobalGameSettings.GetSetting("Playtime").Split(' ');
-        if (setting.Length > 0)
+        if (setting.Length > 0 && setting[0] != string.Empty)
         {
             TimeLimit = int.Parse(setting[0]);
         }
@@ -88,46 +97,48 @@ public class GameTimer : MonoBehaviour
 
     IEnumerator RunTimer()
     {
-        float t = TimeLimit;
+        TimeRemaining = TimeLimit;
         float redFade = 0;
         bool finale = false;
 
-        while (t > 0)
+        while (TimeRemaining > 0)
         {
             if (!Paused)
             {
-                int minutes = (int)(t / 60);
-                int seconds = (int)(t % 60);
-                Gage.fillAmount = t / TimeLimit;
+                int minutes = (int)(TimeRemaining / 60);
+                int seconds = (int)(TimeRemaining % 60);
+                Gage.fillAmount = TimeRemaining / TimeLimit;
                 LabelOfTimer.text = minutes.ToString("D2") + ":" + seconds.ToString("D2");
 
-                if (t < AlmostFinishedTime)
+                if (TimeRemaining < AlmostFinishedTime)
                 {
                     redFade += Time.deltaTime / AlmostFinishedTime;
                     LabelOfTimer.color = Color.Lerp(_ColourStart, AlmostFinishedColor, redFade);
 
                     if (!finale)
                     {
-                        _AlmostFinishedAudio.Play();
+                        AudioManager.Instance.Play("TimeRunningOut");
                         finale = true;
                     }
                 }
 
-                t -= Time.deltaTime;
+                TimeRemaining -= Time.deltaTime;
             }
 
             yield return null;          
         }
 
-        t = 0;
+        TimeRemaining = 0;
         Color c = _FinishedFade.color;
         c.a = 0.5f;
         _FinishedFade.color = c;
-        _FinishedAudio.Play();
+        AudioManager.Instance.Play("TimeRanOut");
         yield return new WaitForSeconds(0.5f);
+
         //make sure the player isn't able to hit stuff anymore
         BlobInputProcessing.SetState(false);
         yield return new WaitForSeconds(1.5f);
+
         TimerRanOut.Invoke();
     }
 }
