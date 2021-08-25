@@ -12,7 +12,6 @@ public class Stars : MonoBehaviour
     [SerializeField] Text _Text;
     public GameObject _boat;
     GameObject SpawnPlace;
-    public AudioSource audi;
     public Sprite redboat;
     public GameObject arrow;
     // Start is called before the first frame update
@@ -39,9 +38,10 @@ public class Stars : MonoBehaviour
 
     IEnumerator instanceBoats()
     {
-        float xaxis =1;
+        AudioManager.Instance.Play("ScoreGrow");
+
+        float xaxis = 1;
         float back = -5.5f;
-        audi.Play();
         for (int i = 0; i< __Score;i++)
         {
             float length = back +(i * 0.5f);

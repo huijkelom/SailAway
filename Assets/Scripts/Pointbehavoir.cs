@@ -35,7 +35,8 @@ public class Pointbehavoir : MonoBehaviour, I_SmartwallInteractable
         if (CanInteract == true)
         {
             boat.GetComponent<Image>().enabled = false;
-            GetComponent<AudioSource>().Play();
+            AudioManager.Instance.Play("BoatMove");
+
             StartCoroutine(BoatMoving(boat.GetComponent<BoatBehavoir>().TotalDistance));
             foreach (GameObject AllGrids in GameObject.FindGameObjectsWithTag("point"))
             {
@@ -123,11 +124,14 @@ public class Pointbehavoir : MonoBehaviour, I_SmartwallInteractable
             }
             _text.text = "";
             _text.GetComponentInChildren<SpriteRenderer>().enabled = false;
-            controller.GetComponent<AudioSource>().Play();
+
+            AudioManager.Instance.Play("Applause");
+
             foreach (GameObject Allboeats in GameObject.FindGameObjectsWithTag("boat"))
             {
                 Allboeats.GetComponent<BoatBehavoir>().CanUse = false;
             }
+
             for(int i =0; i<300; i++)
             {
                 if (boat != null)
@@ -138,8 +142,10 @@ public class Pointbehavoir : MonoBehaviour, I_SmartwallInteractable
                 {
                     break;
                 }
+
                 yield return new WaitForSeconds(0.0166666666666667f);
             }
+
             Invoke("ToScores", 2.5f);
         }
     }
@@ -150,6 +156,7 @@ public class Pointbehavoir : MonoBehaviour, I_SmartwallInteractable
             Manager._LevelName = (controller.LevelName-1);
             Manager.off_LEvelName = 1;
         }
+
         ScoreScreenController.MoveToScores(new List<int>(new int[1] { controller.Score,}), controller.LevelName);
     }
 
@@ -167,8 +174,10 @@ public class Pointbehavoir : MonoBehaviour, I_SmartwallInteractable
             {
                 Image.color = new Vector4(1, 1, 1, 1);
             }
+
             yield return new WaitForSeconds(0.0166666666666667f);
         }
+
         Image.color = new Vector4(1, 1, 1, 1f);
         if (CanInteract == false)
         {

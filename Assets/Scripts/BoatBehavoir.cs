@@ -5,11 +5,6 @@ using UnityEngine.UI;
 
 public class BoatBehavoir : MonoBehaviour, I_SmartwallInteractable
 {
-    void I_SmartwallInteractable.Hit(Vector3 hitPosition)
-    {
-        points();
-        StartCoroutine("Dontuseboats");
-    }
     public LayerMask layer;
     int stop = 0;
     public bool Clicked = false;
@@ -18,6 +13,12 @@ public class BoatBehavoir : MonoBehaviour, I_SmartwallInteractable
     [SerializeField] GameObject pointOrginFront;
     [SerializeField] GameObject pointOrginBack;
     public bool CanUse;
+
+    void I_SmartwallInteractable.Hit(Vector3 hitPosition)
+    {
+        points();
+        StartCoroutine("Dontuseboats");
+    }
 
     void SettingActive(Vector2 Direction, GameObject pointOrgin, bool frontOrBack)
     {
@@ -66,7 +67,8 @@ public class BoatBehavoir : MonoBehaviour, I_SmartwallInteractable
         if (CanUse != false)
         {
             StartCoroutine("Working");
-            GetComponent<AudioSource>().Play();
+            AudioManager.Instance.Play("BoatHit");
+
             foreach (GameObject AllGrids in GameObject.FindGameObjectsWithTag("point"))
             {
                 if (AllGrids.GetComponent<Pointbehavoir>().CanInteract == true)
@@ -84,6 +86,7 @@ public class BoatBehavoir : MonoBehaviour, I_SmartwallInteractable
                 StartCoroutine(Allboeats.GetComponent<BoatBehavoir>().Working());
                 Allboeats.GetComponent<Image>().enabled = false;
             }
+
             GetComponent<Image>().enabled = true;
             StartCoroutine(hit());
         }
@@ -94,10 +97,12 @@ public class BoatBehavoir : MonoBehaviour, I_SmartwallInteractable
         yield return new WaitForSeconds(0.3f);
         CanUse = true;
     }
+
     public void setfalse()
     {
         CanUse = false;
     }
+
     public IEnumerator hit()
     {
         Vector2 oSize = transform.localScale;
@@ -105,6 +110,7 @@ public class BoatBehavoir : MonoBehaviour, I_SmartwallInteractable
         yield return new WaitForSeconds(0.1f);
         transform.localScale = oSize;
     }
+
     public IEnumerator Dontuseboats()
     {
         foreach (GameObject AllBoats in GameObject.FindGameObjectsWithTag("boat"))

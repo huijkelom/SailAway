@@ -13,29 +13,6 @@ public class ScoreSoundsManager : MonoBehaviour
         _Instance = this;
     }
 
-    public static void PlayWinSound()
-    {
-        if (_Instance != null)
-        {
-            _Instance._PlayWinSound();
-        }
-        else
-        {
-            Debug.LogError("ScoreSoundsManager | PlayWinSound | Missing instance of ScoreSoundsManager.");
-        }
-    }
-
-    public static void PlayScoreSound()
-    {
-        if (_Instance != null)
-        {
-            _Instance._PlayScoreSound();
-        }
-        else
-        {
-            Debug.LogError("ScoreSoundsManager | PlayScoreSound | Missing instance of ScoreSoundsManager.");
-        }
-    }
 
     private void _PlayWinSound()
     {
