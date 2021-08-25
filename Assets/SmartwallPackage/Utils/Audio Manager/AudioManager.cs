@@ -118,8 +118,17 @@ public class AudioManager : MonoBehaviour
             sound.Type = type;
 
             sound.Source = container.AddComponent<AudioSource>();
-            sound.Source.clip = sound.Clip;
 
+            //Clip is deprecated, and will be removed in a later version. Use Clips as much as possible.
+            if (sound.Clips.Length > 0 && sound.Clips[0] != null)
+            {
+                sound.Source.clip = sound.Clips[0];
+            }
+            else
+            {
+                throw new System.Exception("AudioSource " + name + " doesn't have an AudioClip in clips. (Clip is deprecated)");
+            }
+            
             sound.MaxVolume = sound.Volume;
             sound.Volume = MasterVolume * volume * sound.Volume;
 
