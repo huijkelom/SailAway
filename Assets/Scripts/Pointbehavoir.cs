@@ -19,7 +19,8 @@ public class Pointbehavoir : MonoBehaviour, I_SmartwallInteractable
     bool overlapping;
     bool frontOrBack;
     public bool finishPoint = false;
-    [SerializeField] ParticleSystem Particles;
+    [SerializeField] private List<ParticleSystem> Particles;
+
     public void Activate(GameObject _Boat, bool _frontOrBack)
     {
         if (overlapping == false)
@@ -91,10 +92,12 @@ public class Pointbehavoir : MonoBehaviour, I_SmartwallInteractable
             pointtopoint = boat.transform.position;
             yield return new WaitForSeconds(0.0166666666666667f);
         }
+
         if (boat != null)
         {
             boat.GetComponent<BoatBehavoir>().CanUse = true;
         }
+
         foreach (GameObject Allboeats in GameObject.FindGameObjectsWithTag("boat"))
         {
             Allboeats.GetComponent<BoatBehavoir>().CanUse = true;
@@ -102,7 +105,11 @@ public class Pointbehavoir : MonoBehaviour, I_SmartwallInteractable
 
         if (finishPoint == true)
         {
-            Particles.Emit(100);
+            foreach(ParticleSystem particle in Particles)
+            {
+                particle.Play();
+            }
+
             _Button.transform.position = new Vector3(0, 0, 0);
             string HighScore = GlobalGameSettings.GetSetting("Reset_High_Score");
             if(PlayerPrefs.GetInt(controller.LevelName.ToString()) == 0)
@@ -132,7 +139,7 @@ public class Pointbehavoir : MonoBehaviour, I_SmartwallInteractable
                 Allboeats.GetComponent<BoatBehavoir>().CanUse = false;
             }
 
-            for(int i =0; i<300; i++)
+            for(int i = 0; i < 200; i++)
             {
                 if (boat != null)
                 {
@@ -146,7 +153,7 @@ public class Pointbehavoir : MonoBehaviour, I_SmartwallInteractable
                 yield return new WaitForSeconds(0.0166666666666667f);
             }
 
-            Invoke("ToScores", 2.5f);
+            ToScores();
         }
     }
     private void ToScores()

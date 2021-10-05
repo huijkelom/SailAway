@@ -22,18 +22,6 @@ public class Stars : MonoBehaviour
         Debug.Log(__Score);
         Debug.Log(starsMin);
         StartCoroutine(instanceBoats());
-        if (__Score < starsMin + 1)
-        {
-        //    StartCoroutine(stars3());
-        }
-        else if (__Score <= starsMin + 2)
-        {
-        //    StartCoroutine(stars2());
-        }
-        else
-        {
-        //    StartCoroutine(stars1());
-        }
     }
 
     IEnumerator instanceBoats()

@@ -28,6 +28,7 @@ public class BoatBehavoir : MonoBehaviour, I_SmartwallInteractable
             pointOrginBack.transform.position += gameObject.transform.TransformDirection(Vector2.down / 2);
             SetRight = true;
         }
+
         Clicked = true;
         Vector2 fwd = transform.TransformDirection(Vector2.up);
         Ray LineForward = new Ray(pointOrgin.transform.position, fwd);
@@ -45,8 +46,10 @@ public class BoatBehavoir : MonoBehaviour, I_SmartwallInteractable
                 break;
             }
         }
+
         Clicked = false;
     }
+
     void Activate(RaycastHit2D hit, bool _frontOrBack)
     {
         if (hit.transform.tag == "boat" && hit.transform.GetComponent<BoatBehavoir>().Clicked == false)
@@ -62,6 +65,7 @@ public class BoatBehavoir : MonoBehaviour, I_SmartwallInteractable
             hit.transform.GetComponent<Pointbehavoir>().Activate(gameObject, _frontOrBack);
         }
     }
+
     public void points()
     {
         if (CanUse != false)
@@ -77,6 +81,7 @@ public class BoatBehavoir : MonoBehaviour, I_SmartwallInteractable
                     AllGrids.GetComponent<Pointbehavoir>().CanInteract = false;
                 }
             }
+
             Vector2 fwd = transform.TransformDirection(Vector2.up);
             Vector2 bwd = transform.TransformDirection(Vector2.down);
             SettingActive(fwd, pointOrginFront, true);
@@ -91,6 +96,7 @@ public class BoatBehavoir : MonoBehaviour, I_SmartwallInteractable
             StartCoroutine(hit());
         }
     }
+
     public IEnumerator Working()
     {
         CanUse = false;
