@@ -7,17 +7,13 @@ public class FishBehaviour : MonoBehaviour
     int spawnplace;
     public Vector3 place;
     public Vector3 movingTowards;
+
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine("_Wait");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     IEnumerator _Wait()
     {
         yield return new WaitForSeconds(Random.Range(5, 10));
@@ -46,42 +42,19 @@ public class FishBehaviour : MonoBehaviour
                 movingTowards = new Vector3(0, -0.02f, 0);
                 break;
         }
+
         StartCoroutine(FishEnter());
-        //StartCoroutine(FishEnter2());
     }
+
     IEnumerator FishEnter()
     {
         transform.position = place;
         while(Vector3.Distance(transform.position,place)<20)
         {
-            transform.position -= movingTowards;
-            //transform.
-            yield return new WaitForSeconds(0.0166666666666667f);
+            transform.position -= movingTowards * 50 * Time.deltaTime;
+            yield return null;
         }
+
         StartCoroutine("_Wait");
-    }
-    float ObjectMove1;
-    float ObjectMove2;
-    IEnumerator FishEnter2()
-    {
-        if (transform.rotation.z > -75)
-        {
-            ObjectMove1 -= 0.0004f;
-        }
-        else
-        {
-            ObjectMove1 += 0.0004f;
-        }
-        transform.Rotate(Vector3.forward * ObjectMove1);
-        if (transform.position.z> -75)
-        {
-            ObjectMove2 -= 0.00004f;
-        }
-        else
-        {
-            ObjectMove2 += 0.00004f;
-        }
-        //transform.Translate(Vector3.forward * (ObjectMove2));
-        yield return new WaitForSeconds(0.0166666666666667f);
     }
 }

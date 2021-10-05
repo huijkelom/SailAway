@@ -20,9 +20,10 @@ public class Floating : MonoBehaviour {
     {
         while (transform.localScale.x <= 0.919f)
         {
-            transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(0.920f, 0.920f), Time.deltaTime * time);
-            yield return new WaitForSeconds(0.0166666666666667f);
+            transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(0.920f, 0.920f), Time.fixedDeltaTime * time);
+            yield return new WaitForFixedUpdate();
         }
+
         StartCoroutine(Smaller());
     }
 
@@ -30,10 +31,10 @@ public class Floating : MonoBehaviour {
     {
         while (transform.localScale.x >= 0.881f)
         {
-            transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(0.880f, 0.880f), Time.deltaTime * time);
-            yield return new WaitForSeconds(0.0166666666666667f);
-
+            transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(0.880f, 0.880f), Time.fixedDeltaTime * time);
+            yield return new WaitForFixedUpdate();
         }
+
         StartCoroutine(Bigger());
     }
 }
