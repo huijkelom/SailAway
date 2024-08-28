@@ -14,6 +14,7 @@ public class Manager : MonoBehaviour
     [SerializeField] Sprite LongSpriteGlow;
     [SerializeField] Sprite MainBoatSprite;
     [SerializeField] GameObject icon;
+    [SerializeField] private Transform Flipper;
     public int LevelName;
     public static int _LevelName;
     public static int off_LEvelName; 
@@ -126,8 +127,10 @@ public class Manager : MonoBehaviour
         {
             Spawn(Level.Boat[i].Pos, Quaternion.Euler(Level.Boat[i].Rotation), Level.Boat[i].Horizontal, Level.Boat[i].longBoat, Level.Boat[i].MainBoat);
         }
+
+        Flipper.localScale = new Vector3(-1, 1, 1);
     }
-    public void Spawn(Vector2 place, Quaternion rotatio, bool Horizontal, bool LongBoat, bool MainBoat)
+    public void Spawn(Vector2 place, Quaternion rotation, bool Horizontal, bool LongBoat, bool MainBoat)
     {
         if (Horizontal == true)
         {
@@ -137,10 +140,13 @@ public class Manager : MonoBehaviour
         {
             place = new Vector2(place.x - 2.5f, place.y - 3);
         }
-        GameObject newboat = Instantiate(Boat, place, rotatio);
-        newboat.transform.SetParent(Boat.transform.parent);
+
+        GameObject newboat = Instantiate(Boat, place, rotation, Flipper);
+
+        //newboat.transform.SetParent(Boat.transform.parent);
         newboat.transform.tag = "boat";
         newboat.transform.localScale = new Vector2(1, 1);
+
         if (LongBoat == true)
         {
             GameObject BoatImg = newboat.transform.GetChild(0).gameObject;
@@ -153,6 +159,7 @@ public class Manager : MonoBehaviour
             BoatImg.GetComponent<RectTransform>().sizeDelta = new Vector2(100, 320);
             newboat.GetComponent<BoatBehavoir>().TotalDistance = 1;
         }
+
         if (MainBoat == true)
         {
             GameObject BoatImg = newboat.transform.GetChild(0).gameObject;

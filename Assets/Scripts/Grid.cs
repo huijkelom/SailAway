@@ -15,7 +15,7 @@ public class Grid : MonoBehaviour
     // Use this for initialization
     void Makegrid()
     {
-        MakeBorders(new Vector2(3.5f, -4.5f), new Vector2(-3.5f, -4.5f));
+        //MakeBorders(new Vector2(3.5f, -4.5f), new Vector2(-3.5f, -4.5f));
         for (int i = 0; i < yRow; i++)
         {
             for (int j = 0; j < xRow; j++)
@@ -27,7 +27,7 @@ public class Grid : MonoBehaviour
                 Coördinates.Add(place);
             }
         }
-        MakeBorders(new Vector2(3.5f, 2.5f), new Vector2(3.5f, -4.5f));
+        //MakeBorders(new Vector2(3.5f, 2.5f), new Vector2(3.5f, -4.5f));
     }
     void MakeBorders(Vector2 x, Vector2 y)
     {
@@ -57,6 +57,6 @@ public class Grid : MonoBehaviour
     }
     void Awake()
     {
-        Makegrid();
+        //Makegrid();
     }
 }
