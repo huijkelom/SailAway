@@ -145,7 +145,7 @@ public class Manager : MonoBehaviour
 
         //newboat.transform.SetParent(Boat.transform.parent);
         newboat.transform.tag = "boat";
-        newboat.transform.localScale = new Vector2(1, 1);
+        newboat.transform.localScale = new Vector3(1, 1, 1);
 
         if (LongBoat == true)
         {
@@ -157,13 +157,23 @@ public class Manager : MonoBehaviour
             newboat.transform.GetChild(1).GetComponent<RectTransform>().localPosition = new Vector2(0,180.1f);
             newboat.transform.GetChild(2).GetComponent<RectTransform>().localPosition = new Vector2(0, -180.1f);
             BoatImg.GetComponent<RectTransform>().sizeDelta = new Vector2(100, 320);
-            newboat.GetComponent<BoatBehavoir>().TotalDistance = 1;
-        }
 
-        if (MainBoat == true)
+            BoatBehavoir boat = newboat.GetComponent<BoatBehavoir>();
+            boat.TotalDistance = 1;
+            boat.SelectBoatType(BoatType.Big);
+        }
+        else if (MainBoat == true)
         {
             GameObject BoatImg = newboat.transform.GetChild(0).gameObject;
             BoatImg.GetComponent<Image>().sprite = MainBoatSprite;
+
+            BoatBehavoir boat = newboat.GetComponent<BoatBehavoir>();
+            boat.SelectBoatType(BoatType.Player);
+        }
+        else
+        {
+            BoatBehavoir boat = newboat.GetComponent<BoatBehavoir>();
+            boat.SelectBoatType(BoatType.Small);
         }
     }
 }

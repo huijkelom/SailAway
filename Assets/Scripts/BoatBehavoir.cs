@@ -13,14 +13,40 @@ public class BoatBehavoir : MonoBehaviour, I_SmartwallInteractable
     [SerializeField] GameObject pointOrginFront;
     [SerializeField] GameObject pointOrginBack;
     public bool CanUse;
+    [Space]
+    [SerializeField] private GameObject PlayerBoat;
+    [SerializeField] private GameObject SmallBoat;
+    [SerializeField] private GameObject BigBoat;
 
-    void I_SmartwallInteractable.Hit(Vector3 hitPosition)
+    public void SelectBoatType(BoatType type)
+    {
+        switch (type)
+        {
+            case BoatType.Player:
+                PlayerBoat.SetActive(true);
+                SmallBoat.SetActive(false);
+                BigBoat.SetActive(false);
+                break;
+            case BoatType.Small:
+                PlayerBoat.SetActive(false);
+                SmallBoat.SetActive(true);
+                BigBoat.SetActive(false);
+                break;
+            case BoatType.Big:
+                PlayerBoat.SetActive(false);
+                SmallBoat.SetActive(false);
+                BigBoat.SetActive(true);
+                break;
+        }
+    }
+
+    public void Hit(Vector3 hitPosition)
     {
         points();
         StartCoroutine("Dontuseboats");
     }
 
-    void SettingActive(Vector2 Direction, GameObject pointOrgin, bool frontOrBack)
+    private void SettingActive(Vector2 Direction, GameObject pointOrgin, bool frontOrBack)
     {
         if (GetComponent<RectTransform>().sizeDelta == new Vector2(100, 300) && SetRight == false)
         {
@@ -50,7 +76,7 @@ public class BoatBehavoir : MonoBehaviour, I_SmartwallInteractable
         Clicked = false;
     }
 
-    void Activate(RaycastHit2D hit, bool _frontOrBack)
+    private void Activate(RaycastHit2D hit, bool _frontOrBack)
     {
         if (hit.transform.tag == "boat" && hit.transform.GetComponent<BoatBehavoir>().Clicked == false)
         {
@@ -111,8 +137,8 @@ public class BoatBehavoir : MonoBehaviour, I_SmartwallInteractable
 
     public IEnumerator hit()
     {
-        Vector2 oSize = transform.localScale;
-        transform.localScale = new Vector2(0.9f, 0.9f);
+        Vector3 oSize = transform.localScale;
+        transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
         yield return new WaitForSeconds(0.1f);
         transform.localScale = oSize;
     }
@@ -137,4 +163,11 @@ public class BoatBehavoir : MonoBehaviour, I_SmartwallInteractable
             AllBoats.GetComponent<BoxCollider2D>().enabled = true;
         }
     }
+}
+
+public enum BoatType
+{
+    Player,
+    Small,
+    Big
 }
