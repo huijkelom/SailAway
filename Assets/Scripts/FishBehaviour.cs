@@ -21,23 +21,23 @@ public class FishBehaviour : MonoBehaviour
         switch (spawnplace)
         {
             case 0:
-                place = new Vector3(8, Random.Range(5, -5), 1);
+                place = new Vector3(8, Random.Range(5, -5), 10);
                 transform.eulerAngles = new Vector3(180,90,90);
                 movingTowards = new Vector3(0.02f, 0, 0);
                 break;
             case 1:
-                place = new Vector3(Random.Range(6, -6), 7, 1);
+                place = new Vector3(Random.Range(6, -6), 7, 10);
                 transform.eulerAngles = new Vector3(90, 90, 90);
                 movingTowards = new Vector3(0, 0.02f, 0);
 
                 break;
             case 2:
-                place = new Vector3(-8, Random.Range(5, -5), 1);
+                place = new Vector3(-8, Random.Range(5, -5), 10);
                 transform.eulerAngles = new Vector3(00, 90, 90);
                 movingTowards = new Vector3(-0.02f, 0, 0);
                 break;
             case 3:
-                place = new Vector3(Random.Range(6, -6), -7, 1);
+                place = new Vector3(Random.Range(6, -6), -7, 10);
                 transform.eulerAngles = new Vector3(270, 90, 90);
                 movingTowards = new Vector3(0, -0.02f, 0);
                 break;

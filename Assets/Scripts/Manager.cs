@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class Manager : MonoBehaviour
 {
-    [SerializeField] GameObject Boat;
-    [SerializeField] Levels[] Levels;
-    Levels Level;
-    [SerializeField] Text _Text;
-    [SerializeField] Text LevelNameText;
-    [SerializeField] Sprite LongSprite;
-    [SerializeField] Sprite LongSpriteGlow;
-    [SerializeField] Sprite MainBoatSprite;
-    [SerializeField] GameObject icon;
+    [SerializeField] private GameObject Boat;
+    [SerializeField] private Levels[] Levels;
+    private Levels Level;
+    [SerializeField] private Text _Text;
+    [SerializeField] private Text LevelNameText;
+    [SerializeField] private Sprite LongSprite;
+    [SerializeField] private Sprite LongSpriteGlow;
+    [SerializeField] private Sprite MainBoatSprite;
+    [SerializeField] private GameObject icon;
     [SerializeField] private Transform Flipper;
     public int LevelName;
     public static int _LevelName;
@@ -69,9 +69,9 @@ public class Manager : MonoBehaviour
         }
         if (off_LEvelName == 0)
         {
-            StartLevel((Level-1 )+ _Difficulty);
-            LevelName = ((Level) + _Difficulty);
-            LevelNameText.text = Difficulty +":" + Level;
+            StartLevel(Level-1 + _Difficulty);
+            LevelName = (Level + _Difficulty);
+            LevelNameText.text = Difficulty +": " + Level;
             minimaleZetten = Levels[LevelName - 1].minimaleZetten;
 
         }
@@ -88,6 +88,7 @@ public class Manager : MonoBehaviour
                 _lev = _lev- 8;
                 _switch++;
             }
+
             switch (_switch)
             {
                 case 1:
@@ -106,16 +107,14 @@ public class Manager : MonoBehaviour
                     Difficulty = "Expert";
                     break;
             }
+
             Debug.Log(_lev);
             _lev = _lev+8;
             LevelNameText.text = Difficulty + ":" + _lev;
             minimaleZetten = Levels[LevelName].minimaleZetten;
-
-
         }
     }
 
-    // Use this for initialization
     public void StartLevel(int LevelName)
     {
         Level = Levels[LevelName];
@@ -154,8 +153,8 @@ public class Manager : MonoBehaviour
             newboat.GetComponent<Image>().sprite = LongSpriteGlow;
             newboat.GetComponent<BoxCollider2D>().size = new Vector2(119, 359);
             newboat.GetComponent<RectTransform>().sizeDelta = new Vector2(170, 370);
-            newboat.transform.GetChild(1).GetComponent<RectTransform>().localPosition = new Vector2(0,180.1f);
-            newboat.transform.GetChild(2).GetComponent<RectTransform>().localPosition = new Vector2(0, -180.1f);
+            //newboat.transform.GetChild(1).GetComponent<RectTransform>().localPosition = new Vector2(0,180.1f);
+            //newboat.transform.GetChild(2).GetComponent<RectTransform>().localPosition = new Vector2(0, -180.1f);
             BoatImg.GetComponent<RectTransform>().sizeDelta = new Vector2(100, 320);
 
             BoatBehavoir boat = newboat.GetComponent<BoatBehavoir>();
