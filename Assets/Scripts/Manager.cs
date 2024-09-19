@@ -108,9 +108,8 @@ public class Manager : MonoBehaviour
                     break;
             }
 
-            Debug.Log(_lev);
-            _lev = _lev+8;
-            LevelNameText.text = Difficulty + ":" + _lev;
+            _lev = _lev + 8;
+            LevelNameText.text = Difficulty + ": " + _lev;
             minimaleZetten = Levels[LevelName].minimaleZetten;
         }
     }
@@ -149,8 +148,8 @@ public class Manager : MonoBehaviour
         if (LongBoat == true)
         {
             GameObject BoatImg = newboat.transform.GetChild(0).gameObject;
-            BoatImg.GetComponent<Image>().sprite = LongSprite;
-            newboat.GetComponent<Image>().sprite = LongSpriteGlow;
+            //BoatImg.GetComponent<Image>().sprite = LongSprite;
+            //newboat.GetComponent<Image>().sprite = LongSpriteGlow;
             newboat.GetComponent<BoxCollider2D>().size = new Vector2(119, 359);
             newboat.GetComponent<RectTransform>().sizeDelta = new Vector2(170, 370);
             //newboat.transform.GetChild(1).GetComponent<RectTransform>().localPosition = new Vector2(0,180.1f);
@@ -164,7 +163,7 @@ public class Manager : MonoBehaviour
         else if (MainBoat == true)
         {
             GameObject BoatImg = newboat.transform.GetChild(0).gameObject;
-            BoatImg.GetComponent<Image>().sprite = MainBoatSprite;
+            //BoatImg.GetComponent<Image>().sprite = MainBoatSprite;
 
             BoatBehavoir boat = newboat.GetComponent<BoatBehavoir>();
             boat.SelectBoatType(BoatType.Player);

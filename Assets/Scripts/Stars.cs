@@ -5,22 +5,23 @@ using UnityEngine.UI;
 
 public class Stars : MonoBehaviour
 {
-    [SerializeField] GameObject[] _Stars;
-    int starsMin;
-    int __Score;
-    [SerializeField] ScoreScreenController ScoreChecker;
-    [SerializeField] Text _Text;
     public GameObject _boat;
-    GameObject SpawnPlace;
     public Sprite redboat;
     public GameObject arrow;
-    // Start is called before the first frame update
+
+    [SerializeField] private Transform BoatHolder;
+    [SerializeField] private ScoreScreenController ScoreChecker;
+    [SerializeField] private Text _Text;
+
+    private int MinimumMoves;
+    private int Score;
+
     public void AmountStars()
     {
-        starsMin = Manager.minimaleZetten;
-        __Score = ScoreChecker._Score;
-        Debug.Log(__Score);
-        Debug.Log(starsMin);
+        MinimumMoves = Manager.minimaleZetten;
+        Score = ScoreChecker._Score;
+        Debug.Log(Score);
+        Debug.Log(MinimumMoves);
         StartCoroutine(instanceBoats());
     }
 
@@ -30,21 +31,22 @@ public class Stars : MonoBehaviour
 
         float xaxis = 1;
         float back = -5.5f;
-        for (int i = 0; i< __Score;i++)
+        for (int i = 0; i< Score;i++)
         {
-            float length = back +(i * 0.5f);
-            GameObject boat;
-            boat = Instantiate(_boat,new Vector3(length,xaxis,0),Quaternion.identity,gameObject.transform);
-            if(i>=starsMin)
+            float length = back + (i * 0.5f);
+            //GameObject boat = Instantiate(_boat, new Vector3(length,xaxis,0), Quaternion.identity, BoatHolder);
+            GameObject boat = Instantiate(_boat, BoatHolder.position, Quaternion.Euler(Vector3.left * 45f), BoatHolder);
+            if (i >= MinimumMoves)
             {
                 boat.GetComponent<Image>().sprite = redboat;
             }
-            if(i>88)
+
+            if (i > 88)
             {
                 GameObject _arrow = Instantiate(arrow, new Vector3((length + 1), xaxis, 0), Quaternion.identity, gameObject.transform);
                 break;
             }
-            else if(i>67)
+            else if (i > 67)
             {
                 xaxis = -2;
                 back = -40f;
@@ -54,13 +56,15 @@ public class Stars : MonoBehaviour
                 xaxis = -1;
                 back = -28.5f;
             }
-            else if(i>21)
+            else if (i > 21)
             {
                 xaxis = -0;
                 back = -17f;
             }
+
             yield return new WaitForSeconds(0.05f);
         }
+
         LanguageController.LanguageChangedEvent += GetTextFromLanguageControllerAndPlaceItOnLabel;
         if (!LanguageController.LanguageLoaded.Equals(string.Empty))
         {
@@ -71,13 +75,13 @@ public class Stars : MonoBehaviour
     private void GetTextFromLanguageControllerAndPlaceItOnLabel()
     {
         _Text.gameObject.SetActive(true);
-        if (starsMin != __Score)
+        if (MinimumMoves != Score)
         {
-            _Text.text = LanguageController.GetText(1) + __Score.ToString() + LanguageController.GetText(2) + starsMin + "!";
+            _Text.text = LanguageController.GetText(1) + Score.ToString() + LanguageController.GetText(2) + MinimumMoves + "!";
         }
         else
         {
-            _Text.text = LanguageController.GetText(3) + starsMin + "!";
+            _Text.text = LanguageController.GetText(3) + MinimumMoves + "!";
         }
     }
 }
