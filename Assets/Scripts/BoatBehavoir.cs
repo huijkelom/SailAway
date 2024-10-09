@@ -17,6 +17,8 @@ public class BoatBehavoir : MonoBehaviour, I_SmartwallInteractable
     [SerializeField] private GameObject PlayerBoat;
     [SerializeField] private GameObject SmallBoat;
     [SerializeField] private GameObject BigBoat;
+    [Space]
+    [SerializeField] private List<GameObject> Cargo;
 
     public void SelectBoatType(BoatType type)
     {
@@ -36,6 +38,9 @@ public class BoatBehavoir : MonoBehaviour, I_SmartwallInteractable
                 PlayerBoat.SetActive(false);
                 SmallBoat.SetActive(false);
                 BigBoat.SetActive(true);
+
+                int i = Random.Range(0, Cargo.Count);
+                Cargo[i].SetActive(true);
                 break;
         }
     }
